@@ -1,0 +1,11 @@
+.Block{
+  text-align: center;
+  color: #fff;
+  padding: 12px;
+  display: flex;
+  flex: 1;           
+}
+.Block-content{
+  max-width: 800px;
+  margin: auto;
+}
