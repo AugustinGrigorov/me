@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faGraduationCap } from '@fortawesome/fontawesome-free-solid';
+import { faBuilding } from '@fortawesome/fontawesome-free-regular';
 import Block from './Block';
 import './App.css';
+
+const activityIcons = {
+  work: faBuilding,
+  education: faGraduationCap,
+};
 
 class App extends Component {
   constructor(props) {
@@ -9,6 +17,7 @@ class App extends Component {
       data: [],
     };
   }
+
   componentWillMount() {
     fetch('https://grigorov-29bf4.firebaseio.com/timeline.json').then((response) => {
       response.json().then((data) => {
@@ -18,7 +27,13 @@ class App extends Component {
   }
 
   render() {
-    const timeline = this.state.data.map(data => <Block data={data} key={data.id} />);
+    const timeline = this.state.data.map(data => (
+      <Block key={data.id} color={data.color}>
+        <h3>{data.title}</h3>
+        <FontAwesomeIcon icon={activityIcons[data.type]} size="2x" />
+        <p>{data.body}</p>
+      </Block>
+    ));
 
     return (
       <div className="App">
