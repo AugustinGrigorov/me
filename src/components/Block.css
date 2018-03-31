@@ -1,4 +1,4 @@
-.Block{
+.Block {
   text-align: center;
   color: #fff;
   padding: 12px;
@@ -7,7 +7,9 @@
   border-bottom: 1px solid rgba(40, 40, 40, 0.8);
   border-top: 1px solid rgba(250, 250, 250, 0.40);
 }
-.Block-content{
+
+.Block-content {
   max-width: 800px;
+  width: 100%;
   margin: auto;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import About from './components/About';
+import Project from './components/Project';
 import TimelineEntry from './components/TimelineEntry';
+import ProjectContainer from './components/ProjectContainer';
 import './App.css';
 
 class App extends Component {
@@ -9,6 +11,7 @@ class App extends Component {
     this.state = {
       timeline: [],
       about: {},
+      projects: [],
     };
   }
 
@@ -18,9 +21,32 @@ class App extends Component {
         this.setState({ timeline, about });
       });
     });
+    fetch('https://api.github.com/users/AugustinGrigorov/repos').then((response) => {
+      response.json().then((repos) => {
+        this.setState({
+          projects: repos.map(repo => (
+            {
+              id: repo.id,
+              name: repo.name,
+              url: repo.html_url,
+              description: repo.description,
+            }
+          )),
+        });
+      });
+    });
   }
 
   render() {
+    const about = Object.keys(this.state.about).length ? (
+      <About
+        color={this.state.about.color}
+        image={this.state.about.image}
+        name={this.state.about.name}
+        bio={this.state.about.bio}
+      />
+    ) : null;
+
     const timeline = this.state.timeline.map(entry => (
       <TimelineEntry
         key={entry.id}
@@ -31,18 +57,21 @@ class App extends Component {
       />
     ));
 
-    const about = Object.keys(this.state.about).length ? (
-      <About
-        color={this.state.about.color}
-        image={this.state.about.image}
-        name={this.state.about.name}
-        bio={this.state.about.bio}
+    const projects = this.state.projects.map(project => (
+      <Project
+        key={project.id}
+        name={project.name}
+        url={project.url}
+        description={project.description}
       />
-    ) : null;
+    ));
 
     return (
       <div className="App">
         {about}
+        <ProjectContainer>
+          {projects}
+        </ProjectContainer>
         {timeline}
       </div>
     );

@@ -1,0 +1,19 @@
+.Project {
+  display: inline-block;
+  margin: 0 10px;
+  width: 200px;
+  vertical-align: top;
+  flex: none;
+}
+
+.Project:first-child {
+  margin-left: calc(50% - 160px);
+}
+
+.Project a {
+  color: #fff;
+}
+
+.Project p {
+  white-space: normal;
+}

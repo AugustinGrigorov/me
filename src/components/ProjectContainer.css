@@ -1,0 +1,30 @@
+.Project-container {
+  white-space: nowrap;
+  overflow: auto;
+  position: relative;
+  display: flex;
+}
+
+.Project-container::-webkit-scrollbar {
+  display: none;
+}
+
+.Project-container::after {
+  position: sticky;
+  width: 50px;
+  right: 0;
+  display: inline-block;
+  content: "";
+  box-shadow: inset -50px 0px 30px -25px #3D5AFE;
+  flex: none;
+}
+
+.Project-container::before {
+  position: sticky;
+  width: 50px;
+  left: 0;
+  display: inline-block;
+  content: "";
+  box-shadow: inset 50px 0px 30px -25px #3D5AFE;
+  flex: none;
+}
