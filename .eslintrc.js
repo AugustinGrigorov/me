@@ -1,7 +1,7 @@
 module.exports = {
     "env": {
         "browser": true,
-        "node": false
+        "node": true
     },
     "extends": "airbnb",
     "rules": {

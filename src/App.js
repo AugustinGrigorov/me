@@ -1,53 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import About from './components/About';
 import Project from './components/Project';
 import TimelineEntry from './components/TimelineEntry';
 import ProjectContainer from './components/ProjectContainer';
+import { fetchProjects, fetchPersonalInfo } from './actions';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeline: [],
-      about: {},
-      projects: [],
-    };
-  }
-
   componentWillMount() {
-    fetch('https://grigorov-29bf4.firebaseio.com/data.json').then((response) => {
-      response.json().then(({ timeline, about }) => {
-        this.setState({ timeline, about });
-      });
-    });
-    fetch('https://api.github.com/users/AugustinGrigorov/repos').then((response) => {
-      response.json().then((repos) => {
-        this.setState({
-          projects: repos.map(repo => (
-            {
-              id: repo.id,
-              name: repo.name,
-              url: repo.html_url,
-              description: repo.description,
-            }
-          )),
-        });
-      });
-    });
+    this.props.dispatch(fetchPersonalInfo());
+    this.props.dispatch(fetchProjects());
   }
 
   render() {
-    const about = Object.keys(this.state.about).length ? (
+    const about = this.props.personalInfoFetched ? (
       <About
-        color={this.state.about.color}
-        image={this.state.about.image}
-        name={this.state.about.name}
-        bio={this.state.about.bio}
+        color={this.props.about.color}
+        image={this.props.about.image}
+        name={this.props.about.name}
+        bio={this.props.about.bio}
       />
     ) : null;
 
-    const timeline = this.state.timeline.map(entry => (
+    const timeline = this.props.timeline.map(entry => (
       <TimelineEntry
         key={entry.id}
         color={entry.color}
@@ -57,7 +34,7 @@ class App extends Component {
       />
     ));
 
-    const projects = this.state.projects.map(project => (
+    const projects = this.props.projects.map(project => (
       <Project
         key={project.id}
         name={project.name}
@@ -78,4 +55,43 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  about: PropTypes.shape({
+    color: PropTypes.string,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    bio: PropTypes.string,
+  }),
+  timeline: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    color: PropTypes.string,
+    title: PropTypes.string,
+    type: PropTypes.string,
+    body: PropTypes.string,
+  })),
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+  })),
+  dispatch: PropTypes.func.isRequired,
+  personalInfoFetched: PropTypes.bool.isRequired,
+};
+
+App.defaultProps = {
+  about: {},
+  timeline: [],
+  projects: [],
+};
+
+const mapStateToProps = state => (
+  {
+    about: state.personalInfo.about,
+    timeline: state.personalInfo.timeline,
+    projects: state.projects.projectList,
+    personalInfoFetched: state.personalInfo.fetched,
+  }
+);
+
+export default connect(mapStateToProps)(App);
