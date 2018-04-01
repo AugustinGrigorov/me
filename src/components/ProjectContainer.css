@@ -1,30 +1,29 @@
+.Project-wrapper {
+  position: relative;
+}
+
+div[class^='Project-wrapper-blur'] {
+  position: absolute;
+  width: 50px;
+  display: block;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+}
+
+.Project-wrapper-blur--first {
+  left: 0;
+  box-shadow: inset 50px 0px 30px -25px #3D5AFE;
+}
+
+.Project-wrapper-blur--last {
+  right: 0;
+  box-shadow: inset -50px 0px 30px -25px #3D5AFE;
+}
+
 .Project-container {
   white-space: nowrap;
   overflow: auto;
   position: relative;
   display: flex;
-}
-
-.Project-container::-webkit-scrollbar {
-  display: none;
-}
-
-.Project-container::after {
-  position: sticky;
-  width: 50px;
-  right: 0;
-  display: inline-block;
-  content: "";
-  box-shadow: inset -50px 0px 30px -25px #3D5AFE;
-  flex: none;
-}
-
-.Project-container::before {
-  position: sticky;
-  width: 50px;
-  left: 0;
-  display: inline-block;
-  content: "";
-  box-shadow: inset 50px 0px 30px -25px #3D5AFE;
-  flex: none;
 }

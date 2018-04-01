@@ -15,7 +15,7 @@ const socialIcons = {
 
 function About(props) {
   const social = props.social.map(profile => (
-    <a href={profile.url} target="_blank">
+    <a href={profile.url} target="_blank" key={profile.name}>
       <FontAwesomeIcon icon={socialIcons[profile.name]} size="lg" />
     </a>
   ));
@@ -23,7 +23,7 @@ function About(props) {
   return (
     <Block color={props.color}>
       <img className="About-image" alt="Augustin Grigorov" src={props.image} />
-      <h3>{props.name}</h3>
+      <h1>{props.name}</h1>
       <div className="About-social">
         {social}
       </div>

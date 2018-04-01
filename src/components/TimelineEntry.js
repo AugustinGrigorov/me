@@ -13,7 +13,7 @@ const activityIcons = {
 function TimelineEntry(props) {
   return (
     <Block color={props.color}>
-      <h3>{props.title}</h3>
+      <h2>{props.title}</h2>
       <FontAwesomeIcon icon={activityIcons[props.type]} size="2x" />
       <p>{props.body}</p>
     </Block>
