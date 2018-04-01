@@ -21,6 +21,7 @@ class App extends Component {
         image={this.props.about.image}
         name={this.props.about.name}
         bio={this.props.about.bio}
+        social={this.props.about.social}
       />
     ) : null;
 
@@ -61,6 +62,10 @@ App.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     bio: PropTypes.string,
+    social: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+    })),
   }),
   timeline: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
