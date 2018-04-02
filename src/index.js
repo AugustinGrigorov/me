@@ -3,8 +3,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
+import ExcludeBrowser from 'react-exclude-browser';
 import thunk from 'redux-thunk';
 import App from './App';
+import UnsupportedBrowserMessage from './components/UnsupportedBrowserMessage';
 import reducer from './reducers';
 import './index.css';
 
@@ -19,8 +21,15 @@ const store = createStore(
 );
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ExcludeBrowser
+    excludedBrowsers={[
+      { name: 'ie' },
+    ]}
+    unsupportedBrowserMessage={UnsupportedBrowserMessage}
+  >
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ExcludeBrowser>,
   document.getElementById('root'),
 );
