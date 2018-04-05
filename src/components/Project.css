@@ -8,7 +8,7 @@
 
 .Project-filler {
   display: inline-block;
-  width: calc(50% - 110px);
+  width: calc(50% - 130px);
   visibility: hidden;
   flex: none;
 }
