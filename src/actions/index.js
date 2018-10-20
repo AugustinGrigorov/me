@@ -40,7 +40,10 @@ export const fetchProjects = () => (dispatch) => {
           name: repo.name,
           url: repo.html_url,
           description: repo.description,
+          lastActive: new Date(repo.updated_at),
         }
-      ))));
+      ))
+        .slice()
+        .sort((project1, project2) => (project2.lastActive - project1.lastActive))));
     });
 };
