@@ -5,14 +5,17 @@ import { faCube } from '@fortawesome/fontawesome-free-solid';
 import './Project.css';
 
 function Project(props) {
+  const { url, name, description } = props;
   return (
     <div className="Project">
-      <a href={props.url}>
+      <a href={url}>
         <h3>
-          <FontAwesomeIcon icon={faCube} /> {props.name}
+          <FontAwesomeIcon icon={faCube} />
+          {' '}
+          {name}
         </h3>
       </a>
-      <p>{props.description}</p>
+      <p>{description}</p>
     </div>
   );
 }

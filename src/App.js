@@ -10,22 +10,29 @@ import './App.css';
 
 class App extends Component {
   componentWillMount() {
-    this.props.dispatch(fetchPersonalInfo());
-    this.props.dispatch(fetchProjects());
+    const { dispatch } = this.props;
+    dispatch(fetchPersonalInfo());
+    dispatch(fetchProjects());
   }
 
   render() {
-    const about = this.props.personalInfoFetched ? (
+    const {
+      personalInfoFetched,
+      timeline: timelineData,
+      projects: projectsData,
+      about: aboutData,
+    } = this.props;
+    const about = personalInfoFetched ? (
       <About
-        color={this.props.about.color}
-        image={this.props.about.image}
-        name={this.props.about.name}
-        bio={this.props.about.bio}
-        social={this.props.about.social}
+        color={aboutData.color}
+        image={aboutData.image}
+        name={aboutData.name}
+        bio={aboutData.bio}
+        social={aboutData.social}
       />
     ) : null;
 
-    const timeline = this.props.timeline.map(entry => (
+    const timeline = timelineData.map(entry => (
       <TimelineEntry
         key={entry.id}
         color={entry.color}
@@ -35,7 +42,7 @@ class App extends Component {
       />
     ));
 
-    const projects = this.props.projects.map(project => (
+    const projects = projectsData.map(project => (
       <Project
         key={project.id}
         name={project.name}
@@ -94,7 +101,7 @@ const mapStateToProps = state => (
   {
     about: state.personalInfo.about,
     timeline: state.personalInfo.timeline,
-    projects: state.projects.projectList,
+    projects: state.projects,
     personalInfoFetched: state.personalInfo.fetched,
   }
 );

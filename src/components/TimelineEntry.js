@@ -11,11 +11,17 @@ const activityIcons = {
 };
 
 function TimelineEntry(props) {
+  const {
+    color,
+    title,
+    type,
+    body,
+  } = props;
   return (
-    <Block color={props.color}>
-      <h2>{props.title}</h2>
-      <FontAwesomeIcon icon={activityIcons[props.type]} size="2x" />
-      <p>{props.body}</p>
+    <Block color={color}>
+      <h2>{title}</h2>
+      <FontAwesomeIcon icon={activityIcons[type]} size="2x" />
+      <p>{body}</p>
     </Block>
   );
 }

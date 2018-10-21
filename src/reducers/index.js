@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_PERSONAL_INFO,
   RECEIVE_PERSONAL_INFO,
-  REQUEST_PROJECTS,
   RECEIVE_PROJECTS,
 } from '../actions';
 
@@ -12,13 +10,8 @@ const personalInfo = (state = {
   about: {},
 }, action) => {
   switch (action.type) {
-    case REQUEST_PERSONAL_INFO:
-      return {
-        ...state,
-      };
     case RECEIVE_PERSONAL_INFO:
       return {
-        ...state,
         fetched: true,
         timeline: action.timeline,
         about: action.about,
@@ -28,19 +21,10 @@ const personalInfo = (state = {
   }
 };
 
-const projects = (state = {
-  projects: [],
-}, action) => {
+const projects = (state = [], action) => {
   switch (action.type) {
-    case REQUEST_PROJECTS:
-      return {
-        ...state,
-      };
     case RECEIVE_PROJECTS:
-      return {
-        ...state,
-        projectList: action.projects,
-      };
+      return action.projects;
     default:
       return state;
   }

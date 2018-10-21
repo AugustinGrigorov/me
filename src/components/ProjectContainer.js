@@ -4,6 +4,7 @@ import Block from './Block';
 import './ProjectContainer.css';
 
 function ProjectContainer(props) {
+  const { children } = props;
   return (
     <Block color="#3D5AFE">
       <h2>My Projects</h2>
@@ -11,7 +12,7 @@ function ProjectContainer(props) {
         <div className="Project-wrapper-blur--first" />
         <div className="Project-container">
           <div className="Project-filler" />
-          {props.children}
+          {children}
           <div className="Project-filler" />
         </div>
         <div className="Project-wrapper-blur--last" />

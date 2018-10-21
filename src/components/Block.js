@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import './Block.css';
 
 function Block(props) {
+  const { color, children } = props;
   return (
-    <div className="Block" style={{ background: props.color }}>
+    <div className="Block" style={{ background: color }}>
       <div className="Block-content">
-        {props.children}
+        {children}
       </div>
     </div>
   );

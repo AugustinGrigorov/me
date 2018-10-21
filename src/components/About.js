@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faLinkedin, faGithub, faStackOverflow } from '@fortawesome/fontawesome-free-brands';
+import {
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+  faGithub,
+  faStackOverflow,
+} from '@fortawesome/fontawesome-free-brands';
 import Block from './Block';
 import './About.css';
 
@@ -14,20 +20,27 @@ const socialIcons = {
 };
 
 function About(props) {
-  const social = props.social.map(profile => (
-    <a href={profile.url} target="_blank" key={profile.name}>
+  const {
+    social: socialData,
+    color,
+    name,
+    image,
+    bio,
+  } = props;
+  const social = socialData.map(profile => (
+    <a href={profile.url} target="_blank" rel="noreferrer noopener" key={profile.name}>
       <FontAwesomeIcon icon={socialIcons[profile.name]} size="lg" />
     </a>
   ));
 
   return (
-    <Block color={props.color}>
-      <img className="About-image" alt="Augustin Grigorov" src={props.image} />
-      <h1>{props.name}</h1>
+    <Block color={color}>
+      <img className="About-image" alt="Augustin Grigorov" src={image} />
+      <h1>{name}</h1>
       <div className="About-social">
         {social}
       </div>
-      <p>{props.bio}</p>
+      <p>{bio}</p>
     </Block>
   );
 }
